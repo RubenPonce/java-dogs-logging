@@ -15,9 +15,9 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 public class DogsinitialApplication
 {
-    public static final String EXCHANGE_NAME = "LambdaServer";
-    public static final String QUEUE_NAME_LOW = "LowPriorityQueue";
-    public static final String QUEUE_NAME_HIGH = "HighPriorityQueue";
+    public static final String EXCHANGE_NAME = "DogServer";
+    public static final String QUEUE_DOGGO = "DoggyQueue";
+    public static final String QUEUE_CHECK_BREED = "CheckBreedDog";
     static DogList ourDogList;
     public static void main(String[] args)
     {
@@ -33,25 +33,25 @@ public class DogsinitialApplication
     @Bean
     public Queue appQueueHigh()
     {
-        return new Queue(QUEUE_NAME_HIGH);
+        return new Queue(QUEUE_CHECK_BREED);
     }
 
     @Bean
     public Binding declareBindingHigh()
     {
-        return BindingBuilder.bind(appQueueHigh()).to(appExchange()).with(QUEUE_NAME_HIGH);
+        return BindingBuilder.bind(appQueueHigh()).to(appExchange()).with(QUEUE_CHECK_BREED);
     }
 
     @Bean
     public Queue appQueueLow()
     {
-        return new Queue(QUEUE_NAME_LOW);
+        return new Queue(QUEUE_DOGGO);
     }
 
     @Bean
     public Binding declareBindingLow()
     {
-        return BindingBuilder.bind(appQueueLow()).to(appExchange()).with(QUEUE_NAME_LOW);
+        return BindingBuilder.bind(appQueueLow()).to(appExchange()).with(QUEUE_DOGGO);
     }
 
     @Bean
